@@ -37,29 +37,55 @@ class Bst
     end
   end
   def post_order(node)
-    p node
     if node != nil
-      self.post_order(node.left)
-      self.post_order(node.right)
+      post_order(node.left)
+      post_order(node.right)
       p node.data
     end
   end
   def pre_order(node)
     if node != nil
       p node.data
-      self.pre_order(node.left)
-      self.pre_order(node.right)
+      pre_order(node.left)
+      pre_order(node.right)
     end
   end
   def inorder(node)
-    if node.left != nil
-      self.inorder(node.left)
+    if node != nil
+      inorder(node.left)
       p node.data
-      self.inorder(node.right)
+      inorder(node.right)
     end
   end
   def get_root
     @root
+  end
+  def perform_operation(operation,rootvalue)
+    case operation 
+    when 1
+      puts "in order"
+      inorder(rootvalue)
+    when 2
+      puts "post order:"
+      post_order(rootvalue)
+    when 3
+      puts "pre order"
+      pre_order(rootvalue)
+    when 3        
+      puts "post order:"
+      post_order(rootvalue)
+    when 4
+        exit
+    end
+    puts "still want to continue with other operations y/n?"
+    perform = gets.chomp
+    if perform == 'y'
+      puts "which operation you want to perform?\n1.inorder\n2.post order\n3.pre order\n4.exit"
+      operation = gets.chomp.to_i
+      perform_operation(operation,rootvalue)
+    else
+      exit
+    end
   end
 end
 
@@ -68,11 +94,7 @@ puts "enter elements for binary tree"
 elements = gets.chomp.split(",")
 elements.each{|element| bst.insertdata(element)}
 rootvalue = (bst.get_root)
-p (rootvalue).class
-puts "post order:"
-bst.post_order(rootvalue)
-puts "pre order"
-bst.pre_order(rootvalue)
-puts "in order"
-bst.inorder(rootvalue)
-
+puts "which operation you want to perform?\n1.inorder\n2.post order\n3.pre order\n4.exit"
+operation = gets.chomp.to_i
+puts "#{operation}"
+bst.perform_operation(operation,rootvalue)
