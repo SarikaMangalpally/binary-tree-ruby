@@ -71,9 +71,6 @@ class Bst
     when 3
       puts "pre order"
       pre_order(rootvalue)
-    when 3        
-      puts "post order:"
-      post_order(rootvalue)
     when 4
         exit
     end
@@ -91,7 +88,7 @@ end
 
 bst = Bst.new;
 puts "enter elements for binary tree"
-elements = gets.chomp.split(",")
+elements = gets.chomp.split(" ")
 elements.each{|element| bst.insertdata(element)}
 rootvalue = (bst.get_root)
 puts "which operation you want to perform?\n1.inorder\n2.post order\n3.pre order\n4.exit"
